@@ -1,8 +1,17 @@
-# React + Vite
+# Prueba técnica
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Project developed in react and vite.
 
-Currently, two official plugins are available:
+Used dependencies:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Axios
+- Tailwindcss
+- React icons
+- React router dom
+- Apollo Client
+
+APIs:
+- https://countries.trevorblades.com
+- https://api.unsplash.com/
+
+[Página desplegada](https://countrysearch-prueba.netlify.app/)
