@@ -1,0 +1,38 @@
+
+.filter-content{
+    @apply absolute z-10 top-[110px] bg-white shadow-lg shadow-gray-500/40 rounded-[30px] p-4 w-4/5 sm:w-3/5 md:w-2/5
+}
+
+.head-filter{
+    @apply flex flex-col sm:justify-between w-full lg:flex-row mb-4
+}
+.head-filter button{
+    @apply text-blue-500 text-lg text-center
+}
+
+.head-filter p{
+    @apply text-gray-500 font-semibold text-lg
+}
+
+.continents{
+    @apply grid grid-cols-2 lg:grid-cols-3  items-center gap-4
+}
+
+.continent{
+    @apply border-2 border-white bg-white text-left
+}
+/* .continent img{
+    @apply w-full
+} */
+
+.img-container{
+    @apply w-full h-24 mb-2;
+}
+
+.img-container img{
+    @apply w-full h-full rounded-lg;
+}
+
+.select{
+    @apply border-2 border-blue-500
+}

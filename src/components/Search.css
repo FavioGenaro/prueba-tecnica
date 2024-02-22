@@ -1,0 +1,15 @@
+.search-content{
+    @apply flex justify-center p-4 relative place-self-start
+}
+
+.search{
+    @apply flex gap-1 sm:gap-2 justify-between shadow-lg shadow-gray-500/40 w-full sm:w-10/12 lg:w-1/2 rounded-full px-8 py-4
+}
+
+.input{
+    @apply inline-flex flex-col justify-start w-10/12 sm:w-1/2 
+}
+
+.btn{
+    @apply flex items-center gap-2 px-4 py-1 text-xl bg-blue-500 text-white rounded-full
+}

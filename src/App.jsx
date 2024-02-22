@@ -16,7 +16,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       {/* <Country/> */}
-      <div className='w-full grid grid-rows-1 content'>
+      <div className='w-full h-full content'>
         <Sidebar/>
         <div>
           <Search/>

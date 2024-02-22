@@ -1,0 +1,4 @@
+
+.country-element{
+    @apply bg-zinc-50 shadow-lg shadow-gray-500/40 rounded-[36px];
+}

@@ -1,0 +1,16 @@
+
+.sidebar{
+    @apply w-full flex justify-between bg-slate-900 text-white sm:h-full sm:flex-col sm:justify-start;
+}
+
+.menu-open{
+    @apply flex flex-col absolute z-10 inset-x-0 top-[74.734px] bg-gray-900/50;
+}
+
+.menu-item{
+    @apply text-lg font-semibold text-center p-4 hover:bg-slate-700/50 sm:hover:bg-slate-700;
+}
+
+a.active{
+    @apply bg-slate-700/50 sm:bg-slate-700;
+}

@@ -1,6 +1,12 @@
 .content{
-    display: grid;
-    grid-template-columns: 1fr 4fr;
-    grid-template-rows: 1fr;
+    /* display: grid;
+    grid-template-rows: 2fr; */
 }
 
+@media (min-width: 640px) { 
+    .content{
+        display: grid;
+        grid-template-columns: 1fr 4fr;
+        grid-template-rows: 1fr;
+    }
+}
