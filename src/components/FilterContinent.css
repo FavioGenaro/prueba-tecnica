@@ -34,5 +34,6 @@
 }
 
 .select{
-    @apply border-2 border-blue-500
+    @apply border-2 border-blue-500 rounded-lg shadow-blue-500/50;
+    box-shadow: 1px 1px 5px rgba(37, 99, 235, 0.5), -1px -1px 5px rgba(37, 99, 235, 0.5);
 }

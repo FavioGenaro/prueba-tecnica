@@ -1,0 +1,31 @@
+
+.descriptioCountry{
+    @apply flex flex-col gap-2
+}
+
+.feature{
+    @apply inline-flex text-lg
+}
+
+.feature h3:nth-child(1){
+    @apply pr-4 font-bold text-blue-500
+}
+.feature:last-child{
+    @apply block
+}
+
+.features{
+    @apply shadow-lg mt-2;
+    box-shadow: 1px 1px 5px rgba(202, 202, 202, 0.5), -1px -1px 5px rgba(202, 202, 202, 0.5);
+}
+
+.listState::-webkit-scrollbar{
+    width: 9px;
+    height: 9px;
+    background-color: #A0A0A0;
+    border-radius: 5px;
+}
+.listState::-webkit-scrollbar-thumb{
+    background-color: #7b7a7a;
+    border-radius: 5px;
+}

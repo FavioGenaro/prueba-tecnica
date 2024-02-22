@@ -4,10 +4,12 @@ import './Search.css'
 import { IoSearch } from "react-icons/io5";
 import FilterContinent from "./FilterContinent";
 
-const Search = () => {
+const Search = ({data, setPaisBuscado, paisBuscado, setFilterContinent, filterContinent}) => {
 
-    const [paisBuscado,setPaisBuscado] = useState('')
+    // const [paisBuscado,setPaisBuscado] = useState('')
     const [mostrarFilter,setMostrarFilter] = useState(false)
+
+    // setBuscar(paisBuscado);
 
     return (
         <div className="search-content">
@@ -25,7 +27,13 @@ const Search = () => {
                         id="" 
                         value={paisBuscado} onChange={(e) => setPaisBuscado(e.target.value)}/>
                     {
-                        mostrarFilter && (<FilterContinent/>)
+                        mostrarFilter && (
+                            <FilterContinent 
+                                data={data}
+                                filterContinent={filterContinent}
+                                setFilterContinent={setFilterContinent}
+                            />
+                        )
                     }
                 </div>
 

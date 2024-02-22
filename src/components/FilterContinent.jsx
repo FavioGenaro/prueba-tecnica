@@ -8,36 +8,29 @@ import oceaniaImg from "../assets/oceania.webp"
 import norteAmericaImg from "../assets/norte-america.webp"
 
 
-const FilterContinent = () => {
-
-    const [continents,setContinents] = useState(new Set([]))
+const FilterContinent = ({setFilterContinent, filterContinent}) => {
 
     function handleSelectContinent (e){
         e.target.classList.add('select')
-        setContinents(new Set([...continents,  e.target.id]))
-        // setContinents([
-        //     ...continents,
-        //     e.target.id
-        // ])
+        setFilterContinent(new Set([...filterContinent,  e.target.id]))
     }
-    
-    console.log(continents)
+
     return (
         <div className="filter-content">
             <div className="head-filter">
                 <p>Filtrar por contienentes</p>
-                <button type="reset" onClick={()=> setContinents(new Set([]))} >Limpiar</button>
+                <button type="reset" onClick={()=> setFilterContinent(new Set([]))} >Limpiar</button>
             </div>
             <div className="continents">
                 <div className="continent" >
-                    <div className="img-container">
+                    <div className="img-container select">
                         <img src={europaImg} alt="Europa" id="Europe" className="" onClick={handleSelectContinent} />
                     </div>
                     <p>Europa</p>
                 </div>
                 <div className="continent">
                     <div className="img-container">
-                        <img src={norteAmericaImg} alt="América" id="America" onClick={handleSelectContinent}/>
+                        <img src={norteAmericaImg} alt="América" id="North America" onClick={handleSelectContinent}/>
                     </div>
                     <p>América</p>
                 </div>

@@ -1,10 +1,13 @@
 import { gql } from '@apollo/client';
 
 const GET_COUNTRY = gql`
-    query GetCountry{
-        countries(filter: { name: { eq: "Andorra" } }){
+    query getCountry($name : String!){
+        countries(filter: { name: { eq: $name } }){
             name
             capital
+            continent{
+                name
+            }
             languages {
                 name
             }

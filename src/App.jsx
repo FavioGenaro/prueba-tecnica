@@ -8,7 +8,7 @@ import Home from './pages/Home'
 import Vista1 from './pages/Vista1'
 import Vista2 from './pages/Vista2'
 import Sidebar from './components/Sidebar'
-import Search from './components/Search'
+
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -19,7 +19,6 @@ function App() {
       <div className='w-full h-full content'>
         <Sidebar/>
         <div>
-          <Search/>
           <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/vista1" element={<Vista1/>} />
