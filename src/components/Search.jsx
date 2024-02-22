@@ -15,9 +15,7 @@ const Search = ({data, setPaisBuscado, paisBuscado, setFilterContinent, filterCo
                     <label htmlFor="search" className="text-xl text-gray-600">País</label>
                     <input 
                         className={`text-sm text-gray-600 focus:outline-none border-b-2 border-white ${(mostrarFilter) && "border-blue-400"} focus:border-blue-400`}
-                        // onClick={()=> setMostrarFilter(!mostrarFilter)}
-                        onFocus={()=> setMostrarFilter(!mostrarFilter)}
-                        // onBlur={()=> setMostrarFilter(false)}
+                        onClick={()=> setMostrarFilter(!mostrarFilter)}
                         type="text"
                         placeholder="Escribe el país que seas ver"
                         name="search" 
@@ -34,7 +32,13 @@ const Search = ({data, setPaisBuscado, paisBuscado, setFilterContinent, filterCo
                     }
                 </div>
 
-                <button className="btn">
+                <button 
+                    className="btn"
+                    onClick={(e) => {
+                        e.preventDefault()
+                        setPaisBuscado(paisBuscado)
+                    }}
+                >
                     <IoSearch size={20}/>
                     <p className="hidden sm:block">Buscar</p>
                 </button>

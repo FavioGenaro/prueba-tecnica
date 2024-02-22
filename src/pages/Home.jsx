@@ -108,7 +108,6 @@ const Home = () => {
         }
     }, [resultCountry])
 
-    console.log(countries)
 
     return (
         <>

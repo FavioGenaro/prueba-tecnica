@@ -4,7 +4,7 @@
 }
 
 .menu-open{
-    @apply flex flex-col absolute z-10 inset-x-0 top-[74.734px] bg-gray-900/50;
+    @apply flex flex-col absolute z-20 inset-x-0 top-[74.734px] bg-gray-900/50;
 }
 
 .menu-item{

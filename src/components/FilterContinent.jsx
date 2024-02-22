@@ -5,7 +5,7 @@ import asiaImg from "../assets/asia.webp"
 import europaImg from "../assets/europa.webp"
 import oceaniaImg from "../assets/oceania.webp"
 import norteAmericaImg from "../assets/norte-america.webp"
-
+import surAmericaImg from "../assets/america-del-sur.webp"
 
 let contienentes = [
     {
@@ -37,6 +37,12 @@ let contienentes = [
         name: "Africa",
         image: africaImg,
         active: false
+    },
+    {
+        id: 6,
+        name: "South America",
+        image: surAmericaImg,
+        active: false
     }
 ]
 
@@ -47,20 +53,21 @@ const FilterContinent = ({setFilterContinent, filterContinent}) => {
         let continent = contienentes.filter(co => co.id == id);
         continent[0].active = !continent[0].active;
 
-        console.log("existe", filterContinent.includes(continent[0].name))
         if(filterContinent.includes(continent[0].name)){ //existe se elimina
             setFilterContinent(filterContinent.filter(co => co !== continent[0].name))
-
         }else{ // no exite, se agrega
             setFilterContinent([...filterContinent,  continent[0].name])
         }
     }
 
     function handleClearFilterContinent(){
-        contienentes = contienentes.map( co => {
-            return {...co, active: false}
-        })
-        setFilterContinent([])
+        
+        if(filterContinent.length!==0){
+            contienentes = contienentes.map( co => { // quitamos los marcos
+                return {...co, active: false}
+            })
+            setFilterContinent([])
+        }
     }
 
     return (
@@ -80,36 +87,6 @@ const FilterContinent = ({setFilterContinent, filterContinent}) => {
                         </div>
                     ))
                 }
-                {/* <div className="continent"  onClick={handleSelectContinent} >
-                    <div className="img-container">
-                        <img src={europaImg} alt="Europa" id="Europe" className="" />
-                    </div>
-                    <p>Europa</p>
-                </div>
-                <div className="continent">
-                    <div className="img-container">
-                        <img src={norteAmericaImg} alt="América" id="North America" onClick={handleSelectContinent}/>
-                    </div>
-                    <p>América</p>
-                </div>
-                <div className="continent">
-                    <div className="img-container">
-                        <img src={asiaImg} alt="Asia" id="Asia" className="" onClick={handleSelectContinent}/>
-                    </div>
-                    <p>Asia</p>
-                </div>
-                <div className="continent">
-                    <div className="img-container">
-                        <img src={oceaniaImg} alt="Oceanía" id="Oceania" className="" onClick={handleSelectContinent}/>
-                    </div>
-                    <p>Oceanía</p>
-                </div>
-                <div className="continent">
-                    <div className="img-container">
-                        <img src={africaImg} alt="Africa" id="Africa" className="" onClick={handleSelectContinent}/>
-                    </div>
-                    <p>Africa</p>
-                </div> */}
             </div>
         </div>
     )
