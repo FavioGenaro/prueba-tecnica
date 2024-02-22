@@ -6,13 +6,13 @@ import bandera from "../assets/bandera.webp"
 const CardCountry = ({dataCountry, setPaisSeleccionado}) => {
 
     return (
-        <div className="fixed text-black w-full bottom-0 sm:w-auto sm:bottom-0 sm:right-0 bg-white py-4 px-8 border-2 border-gray-200">
+        <div className="fixed text-black w-full bottom-0 sm:w-[24rem] sm:bottom-0 sm:right-0 bg-white py-4 px-8 border-2 border-gray-200">
             <div>
                 <IoClose className="ml-auto" size={20} onClick={() => setPaisSeleccionado('')}/>
             </div>
-            <div>
-                <img src="" alt="Imagen Pais" />
-                <div className="headCountry flex gap-3">
+            <div className="w-full">
+                <img src={dataCountry.image} alt="Imagen Pais" className="h-60 w-80 rounded-lg my-4" />
+                <div className="headCountry flex">
                     <div className="mr-4 flex items-center">
                         <img src={bandera} alt="bandera" className="w-14 h-auto " />
                     </div>
@@ -29,7 +29,7 @@ const CardCountry = ({dataCountry, setPaisSeleccionado}) => {
                 </div>
                 <div className="feature">
                     <h3>Language: </h3>
-                    <p>{dataCountry.languages[0].name}</p>
+                    <p>{(dataCountry.languages.length!==0) ? (dataCountry.languages[0].name): ("No hay idiomas.")}</p>
                 </div>
                 <div className="feature">
                     <h3>Currency: </h3>

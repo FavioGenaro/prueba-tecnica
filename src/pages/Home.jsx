@@ -7,26 +7,58 @@ import GET_COUNTRIES from "../graphql/getCountries"
 import GET_COUNTRY from "../graphql/getCountry"
 import { useEffect, useState } from "react"
 import CardCountry from "../components/CardCountry"
+import axios from "axios";
+
 const Home = () => {
 
+    // TODO: Integrarlo al context
     const {data, error, loading} = useQuery(GET_ALL_COUNTRIES);
     const [getCountries, result] = useLazyQuery(GET_COUNTRIES)
     const [getCountry, resultCountry] = useLazyQuery(GET_COUNTRY)
 
-    // if (loading) return "Loading...";
-    // if (error) return <pre>{error.message}</pre>
     const [countries,setCountries] = useState(null);
     const [paisBuscado,setPaisBuscado] = useState('')
     const [paisSeleccionado,setPaisSeleccionado] = useState('')
     const [filterContinent,setFilterContinent] = useState(new Set([]))
+    const [cardCountry,setCardCountry] = useState(null)
 
-    // console.log(data)
+    // extrayendo data de los paises
     useEffect(()=> {
+        let dataCountry = {
+            countries: []
+        }
         if(data!==undefined){
-            setCountries(data)
+             // Petición de imágenes
+            axios({
+                url: `${import.meta.env.VITE_UNSPLASH_URL_BASE}/collections/83895897/photos`,
+                method: "GET",
+                params: {
+                    page:1,
+                    per_page:30,
+                    client_id: import.meta.env.VITE_CLIENT_ID_UNSPLASH,
+                }
+            })
+            .then( res => {
+                let count = 0;
+
+                data.countries.forEach(co => {
+                    if(count==30) count=0;
+                    dataCountry.countries.push({
+                        ...co,
+                        image: res.data[count].urls.small
+                    })
+                    count++;
+                })
+                setCountries(dataCountry)
+                
+            })
+            .catch( err => console.log(err))
+
+            
         }
     }, [data])
 
+    // filtro de data por continente
     useEffect(()=> {
         if(data!==undefined){
             if(filterContinent.size === 0){
@@ -72,14 +104,16 @@ const Home = () => {
     useEffect(()=> {
         if(data!==undefined){
             if(resultCountry.data!==undefined){
-                console.log("Country ",resultCountry.data.countries[0])
+                setCardCountry({
+                    ...resultCountry.data.countries[0],
+                    image: countries.countries.filter(e => e.name == paisSeleccionado)[0].image
+                })
             }
         }
     }, [resultCountry])
 
-    // console.log(countries)
-    // console.log(paisBuscado)
-    // console.log('a')
+    console.log(countries)
+
     return (
         <>
             <Search 
@@ -99,14 +133,18 @@ const Home = () => {
                     (error) && <pre>{error.message}</pre>
                 }
                 {
-                    (countries!==null) && (<Country data={countries} setPaisSeleccionado={setPaisSeleccionado} />)
+                    (countries!==null) && 
+                    (<Country data={countries} setPaisSeleccionado={setPaisSeleccionado}/>)
                 }
                 
             </div>
             {
-                (resultCountry.data!==undefined && paisSeleccionado !== '') 
+                (paisSeleccionado !== '' && cardCountry !==null) 
                     && 
-                (<CardCountry dataCountry={resultCountry.data.countries[0]} setPaisSeleccionado={setPaisSeleccionado}/>)
+                (<CardCountry 
+                    dataCountry={cardCountry} 
+                    setPaisSeleccionado={setPaisSeleccionado}
+                />)
             }
         </>
     )
