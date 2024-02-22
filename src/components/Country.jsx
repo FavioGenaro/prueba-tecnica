@@ -7,11 +7,7 @@ import bandera from "../assets/bandera.webp"
 import countryNotFound from "../assets/country-not-found.webp"
 
 const Country = ({data, setPaisSeleccionado}) => {
-    
-    function handleClick(e) {
-        setPaisSeleccionado(e.target.querySelector(".name").textContent)
-    }
-    
+
     return (
         <>
             {
@@ -22,7 +18,7 @@ const Country = ({data, setPaisSeleccionado}) => {
                                 // count = count + 1;
                                 // if (count == 30) count=0;
                                 return (
-                                    <div key={country.name} className="country-element" onClick={handleClick}>
+                                    <div key={country.name} className="country-element" onClick={()=> setPaisSeleccionado(country.name)}>
                                         <img src={country.image} alt="" className="rounded-t-[36px] h-40 w-full"/>
                                         <div className="pt-2 pb-4 px-4 flex gap-3 items-center">
                                             <img src={bandera} alt="bandera" className="w-14 h-auto" />

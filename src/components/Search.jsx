@@ -6,10 +6,7 @@ import FilterContinent from "./FilterContinent";
 
 const Search = ({data, setPaisBuscado, paisBuscado, setFilterContinent, filterContinent}) => {
 
-    // const [paisBuscado,setPaisBuscado] = useState('')
     const [mostrarFilter,setMostrarFilter] = useState(false)
-
-    // setBuscar(paisBuscado);
 
     return (
         <div className="search-content">

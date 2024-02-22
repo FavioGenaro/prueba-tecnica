@@ -3,7 +3,6 @@ import { useLazyQuery, useQuery } from "@apollo/client"
 import Country from "../components/Country"
 import Search from './../components/Search'
 import GET_ALL_COUNTRIES from "../graphql/getAllCountries"
-import GET_COUNTRIES from "../graphql/getCountries"
 import GET_COUNTRY from "../graphql/getCountry"
 import { useEffect, useState } from "react"
 import CardCountry from "../components/CardCountry"
@@ -11,15 +10,16 @@ import axios from "axios";
 
 const Home = () => {
 
-    // TODO: Integrarlo al context
+    // TODO: Integrar todo a un context
+
     const {data, error, loading} = useQuery(GET_ALL_COUNTRIES);
-    const [getCountries, result] = useLazyQuery(GET_COUNTRIES)
     const [getCountry, resultCountry] = useLazyQuery(GET_COUNTRY)
 
+    const [dataCountryImg, setDataCountryImg] = useState(null);
     const [countries,setCountries] = useState(null);
-    const [paisBuscado,setPaisBuscado] = useState('')
+    const [paisBuscado,setPaisBuscado] = useState('') // barra de busqueda
     const [paisSeleccionado,setPaisSeleccionado] = useState('')
-    const [filterContinent,setFilterContinent] = useState(new Set([]))
+    const [filterContinent,setFilterContinent] = useState([])
     const [cardCountry,setCardCountry] = useState(null)
 
     // extrayendo data de los paises
@@ -49,6 +49,7 @@ const Home = () => {
                     })
                     count++;
                 })
+                setDataCountryImg(dataCountry)
                 setCountries(dataCountry)
                 
             })
@@ -61,11 +62,11 @@ const Home = () => {
     // filtro de data por continente
     useEffect(()=> {
         if(data!==undefined){
-            if(filterContinent.size === 0){
-                setCountries(data)
+            if(filterContinent.length === 0){
+                setCountries(dataCountryImg)
             }else{
                 setCountries({
-                    countries: data.countries.filter( c => filterContinent.has(c.continent.name))   
+                    countries: dataCountryImg.countries.filter( c => filterContinent.includes(c.continent.name))   
                 })
             }
         }
@@ -75,26 +76,21 @@ const Home = () => {
     useEffect(()=> {
         if(data!==undefined){
             if(paisBuscado!==""){
-                let search = "^" + paisBuscado[0].toUpperCase() + paisBuscado.slice(1)
-                getCountries({variables: {nameToSearch: search}})
+                const regex = new RegExp("^" + paisBuscado[0].toUpperCase() + paisBuscado.slice(1));
+
+                const paisesCoincidentes = dataCountryImg.countries.filter(cou => regex.test(cou.name));
+                setCountries({countries: paisesCoincidentes})
             }else{
-                setCountries(data)
+                setCountries(dataCountryImg)
             }
         }
     }, [paisBuscado])
 
-    useEffect(()=> {
-        if(data!==undefined){
-            if(result.data!==undefined){
-                setCountries(result.data);
-            }
-        }
-    }, [result])
 
     // CLICK A PAIS
     useEffect(()=> {
         if(data!==undefined){
-            console.log(paisSeleccionado)
+
             if(paisSeleccionado !== ''){
                 getCountry({variables: {name: paisSeleccionado}})
             }
@@ -118,7 +114,7 @@ const Home = () => {
         <>
             <Search 
                 setCountries={setCountries} 
-                data={data} 
+                data={dataCountryImg} 
                 setPaisBuscado={setPaisBuscado} 
                 paisBuscado={paisBuscado}
                 filterContinent={filterContinent}
